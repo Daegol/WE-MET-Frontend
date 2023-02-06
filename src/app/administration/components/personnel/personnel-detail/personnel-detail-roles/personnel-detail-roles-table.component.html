@@ -1,0 +1,44 @@
+<mat-card>
+    <div *ngIf="isMainAdmin && currentPersonnel">
+        <form [connectForm]="currentPersonnel">
+            <b>Main admin </b>
+            <mat-checkbox color="primary" [checked]="currentPersonnel?.isMainAdmin"
+                (change)="setMainAdminCheckboxValue($event.checked)">
+            </mat-checkbox>
+            <button class="save-btn" mat-button (click)="updateMainAdmin(mainAdminCheckbox)">Save</button>
+        </form>
+
+        <hr>
+    </div>
+
+    <div class="table-container" *ngIf="currentPersonnel && adminInSquadrons">
+        <table class="mat-table full-width-table">
+            <tr class="mat-header-row">
+                <th class="mat-header-cell">Role</th>
+                <th class="mat-header-cell" *ngFor="let squadron of sortedRoles">
+                    {{squadron.squadronName | limitString:10}}</th>
+            </tr>
+            <tr class="mat-row" *ngFor="let role of roleNames | async; let i = index;trackBy:trackByIdx">
+                <td class="mat-cell">{{role.name}}</td>
+                <td class="mat-cell" *ngFor="let squadron of sortedRoles; let j = index;trackBy:trackByIdx">
+                    <mat-checkbox color="primary"
+                        title="{{sortedRoles[j]?.squadronName}} {{sortedRoles[j]?.userRoles[i]?.roleName}}"
+                        [checked]="sortedRoles[j]?.userRoles[i]?.isSet"
+                        [disabled]="!hasAuthorityInSquadron(sortedRoles[j]?.squadronId) || isAdminChecked"
+                        [class.mat-checkbox-disabled]="!hasAuthorityInSquadron(sortedRoles[j]?.squadronId)"
+                        (change)="change(sortedRoles[j]?.squadronId, sortedRoles[j]?.userRoles[i], $event.checked)">
+                    </mat-checkbox>
+                </td>
+            </tr>
+        </table>
+    </div>
+</mat-card>
+<div class="footer"  [hideUnauthorized]="administrationPersonnelRoles">
+    <div class="footer-actions" fxFlex fxLayout="row">
+        <span class="spacer"></span>
+        <button mat-fab type="button" color="primary" (click)="submit()"
+            [disabled]="isAdminChecked || mainAdminCheckbox">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+</div>

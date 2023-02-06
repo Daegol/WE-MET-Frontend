@@ -1,0 +1,61 @@
+.container {
+    width: 400px;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 80px;
+    margin-right: 15px;
+}
+
+.lookup-title {
+    color: black !important; 
+    display: flex;  
+    align-items: center;
+}
+
+.first-panel-row-1 {
+    font-size: 14px;
+    font-weight: 700;
+    color:  #005457;
+}
+
+.first-panel-row-2 {
+    color: #333;
+    font-size: 12px;
+}
+
+.second-panel-info {
+    background: #eee;
+    border-radius: 10px;
+    padding: 15px;
+    border: solid 1px #ddd;
+}
+
+.second-panel-title {
+    color: black;
+    font-weight: 650;
+    font-size: 14px;
+}
+
+.td-name {
+    color: #aaa;
+    margin-right: 10px;
+    padding-right: 15px;
+    font-size: 12px;
+}
+
+.td-value {
+    font-weight: 600;
+    color: #005457;
+    font-size: 12px;
+}
+
+.td-function {
+    font-weight: 600;
+    color: #005457;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.close-button{
+    color: #005457 !important;
+}

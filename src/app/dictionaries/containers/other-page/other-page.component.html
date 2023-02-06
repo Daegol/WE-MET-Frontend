@@ -1,0 +1,15 @@
+<app-dictionaries-filter class="other-filters" fxLayout="row" (globalFilterEvent)="onGlobalFilterEvent($event)"
+  [selectedItems]="selectedOthers$ | async">
+</app-dictionaries-filter>
+
+<app-table-selection fxLayout="row" [selectedItems]="selectedOthers$ | async" (closeEvent)="clearSelection()">
+</app-table-selection>
+
+<div class="other-container" fxLayout="row">
+  <app-other-table class="other-table" [others]="others$ | async" [globalFilterValue]="globalFilterValue"
+    [selectedOthers]="selectedOthers$ | async" (openNewPopup)="openNewOtherPopup()"
+    (openDeletePopup)="openDeleteOtherPopup($event)" (openEditPopup)="openEditOtherPopup($event)"
+    (selectedOthersEvent)="onSelectedOthers($event)" [selectedRow]="selectedRow$ | async"
+    (rowSelectedEvent)="onRowSelectedEvent($event)">
+  </app-other-table>
+</div>

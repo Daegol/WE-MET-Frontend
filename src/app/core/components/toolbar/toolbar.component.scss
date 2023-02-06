@@ -1,0 +1,46 @@
+:host {
+    position: sticky;
+    top: 0px;
+    z-index: 999;
+
+    mat-toolbar {
+        background: white
+      }
+      .toolbarTitle {
+        color: #019592;
+        font-weight: bold;
+      }
+      .return-button {
+        margin-right: 16px;
+      }
+      .email {
+        font-size: 14px;
+        text-align: right;
+        margin-right: 16px;
+      }
+       .help {               
+        font-size: 14px;
+        text-align: right;  
+        float: right;
+        padding-top: 5px;                     
+      }
+
+           
+      .icon_color .mat-icon{
+        color: #019592;
+        font-weight: 1000;
+        padding-top: 8px;   
+      }
+      mat-divider.style-fix {
+        height: 36px;
+        margin-left: 8px;
+        margin-right: 10px;
+     } 
+
+      .mat-toolbar-row, .mat-toolbar-single-row {
+       padding: 0 36px;
+     }
+      
+}
+    
+  

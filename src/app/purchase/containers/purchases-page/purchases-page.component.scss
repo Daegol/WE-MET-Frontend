@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+}
+
+.purchases-lookup {
+    flex: 0 1 auto;
+}
+
+.table {
+    flex: 1;
+    z-index: 1;
+}
+
+.selection-info-container {
+  width: 100%;
+  margin-left: 15px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.selection-info {
+    font-weight: 600;
+}
+
+.top-div {
+    height: 110px;
+    display: flex;
+    align-items: center;
+}
+
+.remove-selection-btn {
+    color: #005457
+}

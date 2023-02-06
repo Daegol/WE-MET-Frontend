@@ -1,0 +1,19 @@
+<mat-toolbar fxFlex class="mat-elevation-z1">
+    <button mat-icon-button class="return-button" (click)="return()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="toolbarTitle">{{title | uppercase}}</span>
+    <span fxFlex class="spacer"></span>
+
+    <mat-divider class="style-fix" [vertical]="true"></mat-divider>
+    <span fxFlex class="email">
+        Zalogowany jako: {{user?.userName}}
+    </span>
+
+    <div>
+        <mat-divider vertical="true"></mat-divider>
+    </div>
+    <button mat-button (click)="logOut.emit()">
+        <mat-icon>power_settings_new</mat-icon> <b> WYLOGUJ</b>
+    </button>
+</mat-toolbar>

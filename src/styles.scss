@@ -1,0 +1,229 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+$custom-typography: mat-typography-config(
+  $font-family: "Poppins",
+);
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core($custom-typography);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"),
+    url(./assets/fonts/Poppins/Poppins-Regular.ttf) format("truetype");
+}
+
+$Wemet-primary: mat-palette($mat-teal);
+$Wemet-accent: mat-palette($mat-blue-gray, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$Wemet-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$Wemet-theme: mat-light-theme($Wemet-primary, $Wemet-accent, $Wemet-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($Wemet-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Poppins;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.info-snackbar {
+  background: #1860d8;
+  color: white;
+  .mat-simple-snackbar-action {
+    color: #eee;
+  }
+}
+
+.error-snackbar {
+  background: #e6492d;
+  color: white;
+  .mat-simple-snackbar-action {
+    color: #eee;
+  }
+}
+
+.success-snackbar {
+  background: #34aa44;
+  color: white;
+  .mat-simple-snackbar-action {
+    color: #eee;
+  }
+}
+
+.mat-elevation-z1 {
+  -webkit-box-shadow: 0px 5px 15px 0px rgba(189, 189, 189, 1);
+  -moz-box-shadow: 0px 5px 15px 0px rgba(189, 189, 189, 1);
+  box-shadow: 0px 5px 15px 0px rgba(189, 189, 189, 1);
+}
+
+.sticky-lookup {
+  position: sticky;
+  top: 80px;
+  display: block;
+  z-index: 0;
+}
+
+mat-sidenav-content {
+  background-color: #eff0f2;
+}
+.status-green {
+  background: #005457;
+  color: white;
+}
+
+.status-yellow {
+  background: #fdd865;
+  color: #444;
+}
+
+.status-red {
+  background: #c02424;
+  color: white;
+}
+
+.true-icon {
+  color: #34aa44;
+}
+
+.grey-icon {
+  color: grey;
+}
+
+
+.false-icon {
+  color: #e6492d;
+}
+/* Right expandable menu's width */
+
+@media (min-width: 940px) {
+  .container {
+    min-width: 25vw !important;
+  }
+}
+
+@media (min-width: 1640px) {
+  .container {
+    min-width: 20vw !important;
+  }
+}
+
+@media (min-width: 1980px) {
+  .container {
+    min-width: 15vw !important;
+  }
+}
+
+/* Squadrons Extended data */
+
+// .mat-list-item-content {
+//   padding: 0px !important;
+// }
+
+/* Squadrons Extended data - Panel Name */
+
+.mat-expansion-panel-header-title {
+  text-transform: uppercase;
+}
+
+.mat-expansion-panel-header-title b {
+  text-transform: none;
+}
+
+/* Right expandable menu's width */
+
+@media (min-width: 940px) {
+  .container {
+    min-width: 25vw !important;
+  }
+}
+
+@media (min-width: 1640px) {
+  .container {
+    min-width: 20vw !important;
+  }
+}
+
+@media (min-width: 1980px) {
+  .container {
+    min-width: 15vw !important;
+  }
+}
+
+/* Squadrons Extended data */
+
+// .mat-list-item-content {
+//   padding: 0px !important;
+// }
+
+/* Action button in modal window */
+
+.mat-dialog-actions {
+  justify-content: space-between;
+}
+
+.mat-list-base .mat-list-item {
+  font-size: 0.9em;
+}
+
+.mat-form-field-subscript-wrapper {
+  font-size: 65%;
+}
+
+
+.browserDetect{
+  display: none;
+}
+
+@media screen and (min-width:0\0) and (min-resolution: 72dpi){
+  
+.browserDetect{
+  display: inline;
+    bottom: 130px;  
+    height: 200px;
+    position: absolute;
+    text-align: center;
+    width: 220px;
+    z-index: 1;
+    margin-left: 40px;
+    color: red;
+}
+}
+
+@-moz-document url-prefix(){  
+.browserDetect{
+  display: inline;
+    bottom: 130px;  
+    height: 200px;
+    position: absolute;
+    text-align: center;
+    width: 220px;
+    z-index: 1;
+    margin-left: 40px;
+    color: red;
+}
+}

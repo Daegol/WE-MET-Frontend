@@ -1,0 +1,20 @@
+<app-personnel-filter class="squad-filters" fxLayout="row" [squadronsNames]="squadrons$ | async"
+  (globalFilterEvent)="onGlobalFilterEvent($event)" (squadronsFilterEvent)="onSquadronsFilterEvent($event)"
+  [personnelParamsData]="personnelParams$ | async" [selectedPersonnels]="selectedPersonnels$ | async">
+</app-personnel-filter>
+<app-table-selection fxLayout="row" [selectedItems]="selectedPersonnels$ | async" (closeEvent)="clearSelection()">
+</app-table-selection>
+<div class="container">
+  <app-personnel-table class="table" [personnel]="personnel$ | async" (openNewPopup)="openNewPersonnelPopup()"
+    (openEdit)="redirectToEditPage($event)" [selectedRow]="selectedRow$ | async"
+    (rowSelectedEvent)="onRowSelectedEvent($event)" [globalFilterValue]="globalFilterValue"
+    [squadronsFilterValue]="squadronsFilterValue" [selectedPersonnels]="selectedPersonnels$ | async"
+    (actionsSelectedPersonnelEvent)="onActionsPersonnelSelected($event)"
+    (openDeletePopup)="openDeletePersonnelPopup($event)" [actionsSelectedPersonnel]="actionsSelectedPersonnel$ | async"
+    (selectedPersonnelsEvent)="onSelectedPersonnels($event)" (openSetPasswordPopup)="openSetPersonnelPasswordPopup()">
+  </app-personnel-table>
+
+  <app-personnel-lookup @inOutAnimation *ngIf="selectedRow$ | async" fxLayoutAlign="right" class="lookup"
+    [row]="selectedRow$ | async">
+  </app-personnel-lookup>
+</div>

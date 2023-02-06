@@ -1,0 +1,139 @@
+.column-form {
+    width: 100%;
+}
+
+
+.login-info {
+    margin-bottom: 30px;
+}
+
+.login-card {
+    max-width: 680px;
+    min-width: 300px;
+    font-weight: 600;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+.login-info {
+    margin-bottom: 30px;
+}
+
+.login-card {
+    margin-top: 25vh;
+    font-weight: 600;
+}
+
+.login-button {
+    width: 100%;
+    background: #005457;
+    color: white;
+    font-size: 12px;
+    height: 55px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.mat-form-field {
+    width: 100%;
+    min-width: 300px;
+    height: 55px;
+    margin-bottom: 35px;
+}
+
+.login-title-text {
+    margin-top: 0px;
+    margin-bottom: 4px;
+    font-weight: 550;
+}
+
+.swbButtons {
+    width: 30%;
+    background: #005457;
+    color: white;
+    font-size: 12px;
+    height: 55px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    border-radius: 5px;
+  float: right;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+a{
+    text-decoration: none;
+    color: #ffffff;
+    cursor:pointer;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+
+/* side-bar row */
+@media (max-width: 750px) {
+    .side-bar {
+        display: flex;
+        flex-direction: row;
+        background: white;
+        display: inline-flex;
+        justify-content: space-between;
+    }
+
+    .container {
+        flex-direction: column;
+        display: flex;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        flex: wrap-content;
+    }
+
+    .logo-wemet-div {
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    .empty-div {
+        display: none;
+    }
+
+    
+}
+
+/* side-bar column */
+@media (min-width: 750px) {
+    .side-bar {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        background: white;
+        justify-content: space-between;
+        height: 100vh;
+    }
+
+    .container {
+        flex-direction: row;
+        display: flex;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        flex: wrap-content;
+    }
+
+    .empty-div {
+        height: 10px;
+        width: 10px;
+    }
+
+    .logo-wemet-div {
+        padding: 15px;
+        font-size: 28px;
+    }
+
+}
+

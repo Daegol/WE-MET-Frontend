@@ -1,0 +1,15 @@
+<app-dictionaries-filter class="zinc-and-lead-filters" fxLayout="row" (globalFilterEvent)="onGlobalFilterEvent($event)"
+  [selectedItems]="selectedZincAndLeads$ | async">
+</app-dictionaries-filter>
+
+<app-table-selection fxLayout="row" [selectedItems]="selectedZincAndLeads$ | async" (closeEvent)="clearSelection()">
+</app-table-selection>
+
+<div class="zinc-and-lead-container" fxLayout="row">
+  <app-zinc-and-lead-table class="zinc-and-lead-table" [zincAndLeads]="zincAndLeads$ | async"
+    [globalFilterValue]="globalFilterValue" [selectedZincAndLeads]="selectedZincAndLeads$ | async"
+    (openNewPopup)="openNewZincAndLeadPopup()" (openDeletePopup)="openDeleteZincAndLeadPopup($event)"
+    (openEditPopup)="openEditZincAndLeadPopup($event)" (selectedZincAndLeadsEvent)="onSelectedZincAndLeads($event)"
+    [selectedRow]="selectedRow$ | async" (rowSelectedEvent)="onRowSelectedEvent($event)">
+  </app-zinc-and-lead-table>
+</div>

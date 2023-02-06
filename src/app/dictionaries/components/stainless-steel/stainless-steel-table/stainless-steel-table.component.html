@@ -1,0 +1,65 @@
+<div class="mat-elevation-z2">
+  <div class="table-container">
+    <table mat-table class="full-width-table" matSort aria-label="Elements">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox color="primary" (change)="$event ? toggleSelected(row) : null" [checked]="isSelected(row)"
+            [hideUnauthorized]="['SuperAdmin', 'Admin']">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>NAZWA</th>
+        <td mat-cell *matCellDef="let row">{{ row?.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions" stickyEnd>
+        <th mat-header-cell class="actions-width" *matHeaderCellDef></th>
+        <td mat-cell class="actions-width" *matCellDef="let row">
+          <button mat-icon-button type="button" class="menu-btn" matTooltip="Więcej..."
+            (click)="$event.stopPropagation()" (click)="selectRow(row)" [matMenuTriggerFor]="menu"
+            aria-label="actions-button" [hideUnauthorized]="['SuperAdmin', 'Admin']">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu (closed)="(onMatMenuClosed)" #menu="matMenu">
+            <button mat-menu-item type="button" (click)="openEditStainlessSteelPopup(row) ; $event.preventDefault()">
+              <mat-icon color="primary">view_list</mat-icon>
+              <span>Edytuj</span>
+            </button>
+            <button type="button" mat-menu-item (click)="openDeleteStainlessSteelPopup([row]); $event.preventDefault()">
+              <mat-icon color="warn">delete</mat-icon>
+              <span>Usuń</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" class="element-row"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="3">{{getNoDataMessage()}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="50"
+    [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>
+
+<div class="footer" [hideUnauthorized]="['SuperAdmin', 'Admin']">
+  <div class="footer-actions" fxFlex fxLayout="row">
+    <span class="spacer"></span>
+    <button mat-fab color="warn" type="button" [disabled]="selection.selected.length === 0"
+      title="{{'deleteTitleStainlessSteel' | buttonTitles}}"
+      (click)="openDeleteStainlessSteelPopup(selection.selected)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <mat-divider vertical="true"></mat-divider>
+    <button mat-fab color="primary" type="button" (click)="openNewStainlessSteelPopup()"
+      title="{{'addTitleStainlessSteel' | buttonTitles}}">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

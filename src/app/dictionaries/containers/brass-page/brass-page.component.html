@@ -1,0 +1,15 @@
+<app-dictionaries-filter class="brass-filters" fxLayout="row" (globalFilterEvent)="onGlobalFilterEvent($event)"
+  [selectedItems]="selectedBrasss$ | async">
+</app-dictionaries-filter>
+
+<app-table-selection fxLayout="row" [selectedItems]="selectedBrasss$ | async" (closeEvent)="clearSelection()">
+</app-table-selection>
+
+<div class="brass-container" fxLayout="row">
+  <app-brass-table class="brass-table" [brasss]="brasss$ | async" [globalFilterValue]="globalFilterValue"
+    [selectedBrasss]="selectedBrasss$ | async" (openNewPopup)="openNewBrassPopup()"
+    (openDeletePopup)="openDeleteBrassPopup($event)" (openEditPopup)="openEditBrassPopup($event)"
+    (selectedBrasssEvent)="onSelectedBrasss($event)" [selectedRow]="selectedRow$ | async"
+    (rowSelectedEvent)="onRowSelectedEvent($event)">
+  </app-brass-table>
+</div>

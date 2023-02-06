@@ -1,0 +1,15 @@
+<app-dictionaries-filter class="copper-filters" fxLayout="row" (globalFilterEvent)="onGlobalFilterEvent($event)"
+  [selectedItems]="selectedCoppers$ | async">
+</app-dictionaries-filter>
+
+<app-table-selection fxLayout="row" [selectedItems]="selectedCoppers$ | async" (closeEvent)="clearSelection()">
+</app-table-selection>
+
+<div class="copper-container" fxLayout="row">
+  <app-copper-table class="copper-table" [coppers]="coppers$ | async" [globalFilterValue]="globalFilterValue"
+    [selectedCoppers]="selectedCoppers$ | async" (openNewPopup)="openNewCopperPopup()"
+    (openDeletePopup)="openDeleteCopperPopup($event)" (openEditPopup)="openEditCopperPopup($event)"
+    (selectedCoppersEvent)="onSelectedCoppers($event)" [selectedRow]="selectedRow$ | async"
+    (rowSelectedEvent)="onRowSelectedEvent($event)">
+  </app-copper-table>
+</div>

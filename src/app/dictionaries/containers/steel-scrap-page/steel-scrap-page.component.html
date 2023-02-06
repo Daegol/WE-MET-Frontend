@@ -1,0 +1,15 @@
+<app-dictionaries-filter class="steel-scrap-filters" fxLayout="row" (globalFilterEvent)="onGlobalFilterEvent($event)"
+  [selectedItems]="selectedSteelScraps$ | async">
+</app-dictionaries-filter>
+
+<app-table-selection fxLayout="row" [selectedItems]="selectedSteelScraps$ | async" (closeEvent)="clearSelection()">
+</app-table-selection>
+
+<div class="steel-scrap-container" fxLayout="row">
+  <app-steel-scrap-table class="steel-scrap-table" [steelScraps]="steelScraps$ | async"
+    [globalFilterValue]="globalFilterValue" [selectedSteelScraps]="selectedSteelScraps$ | async"
+    (openNewPopup)="openNewSteelScrapPopup()" (openDeletePopup)="openDeleteSteelScrapPopup($event)"
+    (openEditPopup)="openEditSteelScrapPopup($event)" (selectedSteelScrapsEvent)="onSelectedSteelScraps($event)"
+    [selectedRow]="selectedRow$ | async" (rowSelectedEvent)="onRowSelectedEvent($event)">
+  </app-steel-scrap-table>
+</div>

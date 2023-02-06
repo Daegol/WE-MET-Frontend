@@ -1,0 +1,143 @@
+<h2 mat-dialog-title>Add new user</h2>
+<mat-dialog-content>
+  <form [formGroup]="newPersonnel">
+    <div class="shipping-card">
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select formControlName="rankID" placeholder="Rank" required>
+              <mat-option *ngFor="let rank of ranks$ | async" [value]="rank.id">{{rank.name}}
+              </mat-option>
+              <mat-option ngDefaultControl *ngIf="!(ranks$| async)?.length">
+                NO DATA</mat-option>
+            </mat-select>
+              <mat-error *ngIf="newPersonnel.controls['rankID'].hasError('required')">
+              <span [innerHtml]="'rankRequired' | errorMsgs"></span>
+              </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Callsign" formControlName="callsign" required
+              [pattern]="'lettersAndDigitsWithSpace' | patternValues" maxlength="15">
+            <mat-error *ngIf="newPersonnel.controls['callsign'].hasError('required')">
+              <span [innerHtml]="'valueRequired' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['callsign'].hasError('pattern')">
+              <span [innerHtml]="'notAllowed' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['callsign'].hasError('minlength')">
+              <span [innerHtml]="'minLength' | errorMsgs"></span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="First name" formControlName="firstName"
+              [pattern]="'lettersAndDigitsWithSpace' | patternValues" maxlength="50" required>
+            <mat-error *ngIf="newPersonnel.controls['firstName'].hasError('required')">
+              <span [innerHtml]="'firstNameRequired' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['firstName'].hasError('pattern')">
+              <span [innerHtml]="'notAllowed' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['firstName'].hasError('minlength')">
+              <span [innerHtml]="'minLength' | errorMsgs"></span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Last name" formControlName="lastName"
+              [pattern]="'lettersAndDigitsWithSpace' | patternValues" maxlength="50" required>
+            <mat-error *ngIf="newPersonnel.controls['lastName'].hasError('required')">
+              <span [innerHtml]="'lastNameRequired' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['lastName'].hasError('pattern')">
+              <span [innerHtml]="'notAllowed' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['lastName'].hasError('minlength')">
+              <span [innerHtml]="'minLength' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['lastName'].hasError('maxlength')">
+              <span [innerHtml]="'maxLength' | errorMsgs"></span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Login" formControlName="email" required>
+            <mat-error *ngIf="newPersonnel.controls['email'].hasError('required')">
+              <span [innerHtml]="'loginRequired' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['email'].hasError('email')">
+              <span [innerHtml]="'loginEmail' | errorMsgs"></span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select formControlName="squadronID" placeholder="Squadron" required>
+              <mat-option *ngFor="let squadron of squadrons$ | async" [value]="squadron.id">{{squadron.name}}
+              </mat-option>
+              <mat-option ngDefaultControl *ngIf="!(squadrons$| async)?.length">
+                NO DATA</mat-option>
+            </mat-select>
+            <mat-error *ngIf="newPersonnel.controls['squadronID'].hasError('required')">
+              <span [innerHtml]="'squadronRequired' | errorMsgs"></span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password"
+              required>
+            <mat-error *ngIf="newPersonnel.controls['password'].hasError('required')">
+              <span [innerHtml]="'passwordRequired' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['password'].hasError('minlength')">
+              <span [innerHtml]="'minLength' | errorMsgs"></span>
+            </mat-error>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide" type="button">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Repeat password"
+              formControlName="confirmPassword" required>
+            <mat-error *ngIf="newPersonnel.controls['confirmPassword'].hasError('required')">
+              <span [innerHtml]="'repeatPassword' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['confirmPassword'].hasError('minlength')">
+              <span [innerHtml]="'minLength' | errorMsgs"></span>
+            </mat-error>
+            <mat-error *ngIf="newPersonnel.controls['confirmPassword'].hasError('mustMatch')">
+              <span [innerHtml]="'passwordMatch' | errorMsgs"></span>
+            </mat-error>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide" type="button">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="!newPersonnel.valid">
+    Save
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,121 @@
+<mat-card class="details-mat-card">
+    <form [formGroup]="editPersonnel" (ngSubmit)="submit()" [connectForm]="currentPersonnel$ | async">
+        <mat-card-title fxFlex>{{editPersonnel.value.firstName}} {{editPersonnel.value.lastName}}
+        </mat-card-title>
+        <mat-card-content>
+            <mat-tab-group #tabGroup dynamicHeight animationDuration="0ms">
+                <mat-tab label="Basic data">
+                    <div class="tabContent">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field class="full-width">
+                                    <mat-select formControlName="rankID" placeholder="Rank" required>
+                                        <mat-option *ngFor="let rank of ranks$ | async" [value]="rank.id">{{rank?.name}}
+                                        </mat-option>
+                                        <mat-option ngDefaultControl *ngIf="!(ranks$| async)?.length">
+                                            NO DATA</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="editPersonnel.controls['rankID'].hasError('required')">
+                                        <span [innerHtml]="'rankRequired' | errorMsgs"></span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="First name" formControlName="firstName"
+                                        [pattern]="'lettersAndDigitsWithSpace' | patternValues" maxlength="50" required>
+                                    <mat-error *ngIf="editPersonnel.controls['firstName'].hasError('required')">
+                                        <span [innerHtml]="'firstNameRequired' | errorMsgs"></span>
+                                    </mat-error>
+                                    <mat-error *ngIf="editPersonnel.controls['firstName'].hasError('pattern')">
+                                        <span [innerHtml]="'notAllowed' | errorMsgs"></span>
+                                    </mat-error>
+                                    <mat-error *ngIf="editPersonnel.controls['firstName'].hasError('minlength')">
+                                        <span [innerHtml]="'minLength' | errorMsgs"></span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="Last name" formControlName="lastName"
+                                        [pattern]="'lettersAndDigitsWithSpace' | patternValues" maxlength="50" required>
+                                    <mat-error *ngIf="editPersonnel.controls['lastName'].hasError('required')">
+                                        <span [innerHtml]="'lastNameRequired' | errorMsgs"></span>
+                                    </mat-error>
+                                    <mat-error *ngIf="editPersonnel.controls['lastName'].hasError('pattern')">
+                                        <span [innerHtml]="'notAllowed' | errorMsgs"></span>
+                                    </mat-error>
+                                    <mat-error *ngIf="editPersonnel.controls['lastName'].hasError('minlength')">
+                                        <span [innerHtml]="'minLength' | errorMsgs"></span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="CallSign" formControlName="callsign" maxlength="15"
+                                        required [pattern]="'lettersAndDigitsWithSpace' | patternValues">
+                                    <mat-error *ngIf="editPersonnel.controls['callsign'].hasError('required')">
+                                        <span [innerHtml]="'valueRequired' | errorMsgs"></span>
+                                    </mat-error>
+                                    <mat-error *ngIf="editPersonnel.controls['callsign'].hasError('pattern')">
+                                        <span [innerHtml]="'notAllowed' | errorMsgs"></span>
+                                    </mat-error>
+                                    <mat-error *ngIf="editPersonnel.controls['callsign'].hasError('minlength')">
+                                        <span [innerHtml]="'minLength' | errorMsgs"></span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field class="full-width">
+                                    <mat-select formControlName="squadronID" placeholder="Squadron" required>
+                                        <mat-option *ngFor="let squadron of squadrons$ | async" [value]="squadron.id">
+                                            {{squadron?.name}}</mat-option>
+                                        <mat-option ngDefaultControl *ngIf="!(squadrons$| async)?.length">
+                                            NO DATA</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="editPersonnel.controls['squadronID'].hasError('required')">
+                                        <span [innerHtml]="'squadronRequired' | errorMsgs"></span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <mat-checkbox formControlName="isPersonnel" placeholder="Personnel">Personnel
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-1">
+                                <mat-checkbox formControlName="isLocked" placeholder="Locked">Locked
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Roles">
+                    <app-personnel-detail-roles-table [currentPersonnel]="currentPersonnel$ | async">
+                    </app-personnel-detail-roles-table>
+                </mat-tab>
+                <mat-tab label="Groups">
+                    <app-personnel-detail-groups-table [currentPersonnel]="currentPersonnel$ | async"
+                        [selectedGroups]="selectedGroups$ | async" (openAddPopup)="openAddGroupPopup()"
+                        (openDeletePopup)="openDeleteGroupPopup($event)">
+                    </app-personnel-detail-groups-table>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card-content>
+    </form>
+</mat-card>
+
+<div class="footer" *ngIf="tabGroup.selectedIndex == 0" [hideUnauthorized]="administrationPersonnelRoles">
+    <div class="footer-actions">
+        <span class="spacer"></span>
+        <button mat-fab color="primary" title="{{'saveTitlePersonnel' | buttonTitles}}" (click)="submit()"
+            [disabled]="!editPersonnel.valid || editPersonnel.pristine">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+</div>

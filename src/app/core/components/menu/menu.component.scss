@@ -1,0 +1,45 @@
+mat-nav-list {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+mat-sidenav {
+    display: flex;
+    width: 300px;
+    background: #002223;
+    color: white;
+    overflow-x: hidden;
+}
+
+.navigationWrapper {
+    flex-wrap: wrap;
+} 
+
+.mat-sidenav-closed {
+    width:80px;
+}
+
+.mat-list-item {
+    color: white;
+    padding: 8px 0;
+    size: 40px;
+}
+
+.mat-list-item:hover {        
+    color: #019592;
+}
+
+.mat-list-item.active {
+    color: #019592;
+}
+
+.routeIcon {
+    margin-right: 15px;
+    width:30px;
+    margin-left: 10px;
+}
+
+.sidenavLogoContainer {
+    height: 70px !important;
+    font-size: 30px;
+}

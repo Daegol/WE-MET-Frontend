@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Usuwanie elementu(ów)</h2>
+<mat-dialog-content>
+  <div class="shipping-card">
+    <div class="row">
+      <div class="col">
+        <p>Jesteś pewny?</p>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button type="button" onkeypress="return event.keyCode != 13;" [mat-dialog-close]="false">Nie</button>
+  <button mat-raised-button type="button" onkeypress="return event.keyCode != 13;" color="primary"
+    [mat-dialog-close]="true">
+    Tak
+  </button>
+</mat-dialog-actions>

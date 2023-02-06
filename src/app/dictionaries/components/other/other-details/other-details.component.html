@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Inne. Edycja elementu</h2>
+<mat-dialog-content>
+  <form [formGroup]="editOther" [connectForm]="currentOther$ | async">
+    <div class="shipping-card">
+      <div class="row">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nazwa" formControlName="name" type="text"
+            [pattern]="'lettersAndDigitsWithSpace' | patternValues" maxlength="50" required>
+          <mat-error *ngIf="editOther.controls['name'].hasError('required')">
+            Nazwa jest wymagana
+          </mat-error>
+          <mat-error *ngIf="editOther.controls['name'].hasError('minlength')">
+            Długość wprowadzonej nazwy jest za krótka
+          </mat-error>
+          <mat-error *ngIf="editOther.controls['name'].hasError('pattern')">
+            W nazwie użyto niedozwolonych znaków
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button type="button" (click)="cancel()">Anuluj</button>
+  <button mat-raised-button type="button" color="primary" [mat-dialog-close]="true"
+    title="{{'saveOther' | buttonTitles}}" [disabled]="!editOther.valid || editOther.pristine" (click)="submit()">
+    Zapisz
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,75 @@
+.full-width-table {
+    width: 100%;
+}
+
+.table-container {
+    display: flex;
+    position: relative;
+}
+
+.table-container .loading-shade {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.spacer {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.spacer {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.highlight{
+    background: #ccc;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    left: 0;
+    z-index: 2;
+}
+
+.footer-actions {
+  display: flex;
+  padding: 10px;
+
+  .mat-fab {
+    margin: 10px;
+  }
+}
+
+td.mat-cell:first-of-type{
+  white-space: nowrap !important;
+  text-align: left !important;
+  padding-left: 10px !important;
+}
+
+td.mat-cell{
+  text-align: center !important;
+}
+
+th.mat-header-cell{
+  text-align: center !important;
+}
+
+th.mat-header-cell:first-of-type{
+   white-space: nowrap !important;
+  text-align: left !important;
+  padding-left: 10px !important;
+}
+
+.save-btn {
+  background:#009688;
+  color: white;
+  margin-left: 10px;
+}
+
+

@@ -1,0 +1,22 @@
+<app-purchases-filter class="purchases-filters" fxLayout="row" [statusesNames]="statusesNames$ | async"
+    [squadronsNames]="squadrons$ | async" (globalFilterEvent)="onGlobalFilterEvent($event)"
+    (squadronsFilterEvent)="onSquadronsFilterEvent($event)" (statusesFilterEvent)="onStatusesFilterEvent($event)"
+    [purchasesParamsData]="purchasesParams$ | async" [selectedPurchases]="selectedPurchases$ | async">
+</app-purchases-filter>
+
+<app-table-selection fxLayout="row" [selectedItems]="selectedPurchases$ | async" (closeEvent)="clearSelection()">
+</app-table-selection>
+
+<div class="container">
+    <app-purchases-table class="table" [purchases]="purchases$ | async" (openNewPopup)="openNewPurchasePopup()"
+        (deleteSelected)="deleteSelectedItems($event)" [selectedRow]="selectedRow$ | async"
+        [selectedPurchases]="selectedPurchases$ | async" (rowSelectedEvent)="onRowSelectedEvent($event)"
+        (openNewPopup)="openNewPurchasePopup()" (openDeletePopup)="openDeletePurchasePopup($event)"
+        (selectedPurchasesEvent)="onSelectedPurchases($event)" (openEdit)="redirectToEditPage($event)"
+        (openAdd)="redirectToAddPage()" [globalFilterValue]="globalFilterValue"
+        [squadronsFilterValue]="squadronsFilterValue" [statusesFilterValue]="statusesFilterValue">
+    </app-purchases-table>
+    <div @inOutAnimation *ngIf="selectedRow$ | async" fxLayoutAlign="right" class="purchases-lookup">
+        <app-purchases-lookup [row]="selectedRow$ | async"></app-purchases-lookup>
+    </div>
+</div>

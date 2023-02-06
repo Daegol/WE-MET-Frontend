@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+}
+
+.table {
+  flex: 1;
+  z-index: 1;
+}
+
+.lookup {
+  flex: 0 1 auto;
+}

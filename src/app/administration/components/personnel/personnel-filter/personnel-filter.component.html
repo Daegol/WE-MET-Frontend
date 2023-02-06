@@ -1,0 +1,25 @@
+<div fxLayout="row" class="filter-row" [formGroup]="filterParams">
+    <p class="filters-title">FILTRY</p>
+    <mat-form-field class="mat-form-field-filter" appearance="outline">
+        <mat-label>SZUKAJ</mat-label>
+        <input matInput #input (input)="onGlobalFilterChanged($event.target.value)" formControlName="global">
+    </mat-form-field>
+    <mat-form-field class="mat-form-field-filter" appearance="outline">
+        <mat-label>SQUADRON</mat-label>
+        <mat-select #squadrons multiple (selectionChange)="onSquadronsFilterChanged($event)"
+            formControlName="selectedSquadrons">
+            <mat-select-trigger>
+                {{filterParams?.value.selectedSquadrons ? filterParams?.value?.selectedSquadrons[0] : ''}}
+                <span *ngIf="filterParams?.value?.selectedSquadrons?.length > 1">
+                    (+{{filterParams?.value.selectedSquadrons.length - 1}}
+                    {{filterParams?.value.selectedSquadrons.length === 2? 'other' : 'others'}})
+                </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let squadron of squadronsNames" [value]="squadron?.name">{{squadron?.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-button class="clear-filters-btn" (click)="onClearFilters()" [disabled]="selectedPersonnels?.length > 0">
+        WYCZYŚĆ FILTRY
+    </button>
+</div>

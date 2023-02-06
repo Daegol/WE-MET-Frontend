@@ -1,0 +1,91 @@
+<div class="mat-elevation-z2">
+  <div class="table-container">
+    <table mat-table class="full-width-table" matSort aria-label="Elements">
+
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox color="primary" (change)="$event ? toggleSelected(row) : null" [checked]="isSelected(row)"
+            [hideUnauthorized]="['Administrator', 'Main Administrator', 'MX Scheduling']">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="squadonName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>SQUADRON</th>
+        <td mat-cell *matCellDef="let row">{{row.squadonName | limitString:20}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="purchaseTypeName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>AIRCRAFT TYPE</th>
+        <td mat-cell *matCellDef="let row">{{row.purchaseTypeName | limitString:50}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="tailNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>TAIL NUMBER</th>
+        <td mat-cell *matCellDef="let row">{{row.tailNumber | limitString:10}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="localizationName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>LOCALIZATION</th>
+        <td mat-cell *matCellDef="let row">{{row.localizationName | limitString:50}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="purchaseStatusName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>STATUS</th>
+        <td mat-cell *matCellDef="let row">
+          <div class="status" [style.backgroundColor]=row.purchaseStatusBackgroundColor
+            [style.color]=row.purchaseStatusFontColor>
+            {{row.purchaseStatusName}}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions" stickyEnd>
+        <th mat-header-cell class="actions-width" *matHeaderCellDef></th>
+        <td mat-cell class="actions-width" *matCellDef="let row">
+          <button class="menu-btn" mat-icon-button matTooltip="More actions..." (click)="$event.stopPropagation()"
+            [matMenuTriggerFor]="menu" aria-label="actions-button">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editSelectedRow(row.id)">
+              <mat-icon color="primary">view_list</mat-icon>
+              <span [hideUnauthorized]="['Administrator', 'Main Administrator', 'MX Scheduling']">Edit</span>
+              <span [hideAuthorized]="['Administrator', 'Main Administrator', 'MX Scheduling']">Details</span>
+            </button>
+            <button mat-menu-item [hideUnauthorized]="['Administrator', 'Main Administrator', 'MX Scheduling']"
+              (click)="openDeletePurchasePopup([row])">
+              <mat-icon color="warn">delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row"
+        [ngClass]="{'highlight': selectedRow === row}" (click)="selectRow(row)"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="7">{{getNoDataMessage()}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="50"
+    [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>
+
+<div class="footer" [hideUnauthorized]="['Administrator', 'Main Administrator', 'MX Scheduling']">
+  <div class="footer-actions" fxFlex fxLayout="row">
+    <span class="spacer"></span>
+    <button mat-fab color="warn" [disabled]="areSelectedItems()" title="{{'deleteTitlePurchase' | buttonTitles}}"
+      (click)="openDeletePurchasePopup(selection.selected)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <mat-divider vertical="true"></mat-divider>
+    <button mat-fab color="primary" (click)="addNewPurchase()" title="{{'addTitlePurchase' | buttonTitles}}">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

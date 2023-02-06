@@ -1,0 +1,16 @@
+<div class="grid-container">
+  <mat-grid-list cols="4" rowHeight="25vh">
+    <mat-grid-tile *ngFor="let card of filteredCards" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card routerLink="/administration/dictionaries/{{ card.path }}" class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{ card.title }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <img src="{{card.icon}}" class="dictionaries-icon">
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

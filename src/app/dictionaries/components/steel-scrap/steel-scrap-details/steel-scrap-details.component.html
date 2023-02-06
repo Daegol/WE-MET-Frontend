@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Złom stalowy. Edycja elementu</h2>
+<mat-dialog-content>
+  <form [formGroup]="editSteelScrap" [connectForm]="currentSteelScrap$ | async">
+    <div class="shipping-card">
+      <div class="row">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nazwa" formControlName="name" type="text"
+            [pattern]="'lettersAndDigitsWithSpace' | patternValues" maxlength="50" required>
+          <mat-error *ngIf="editSteelScrap.controls['name'].hasError('required')">
+            Nazwa jest wymagana
+          </mat-error>
+          <mat-error *ngIf="editSteelScrap.controls['name'].hasError('minlength')">
+            Długość wprowadzonej nazwy jest za krótka
+          </mat-error>
+          <mat-error *ngIf="editSteelScrap.controls['name'].hasError('pattern')">
+            W nazwie użyto niedozwolonych znaków
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button type="button" (click)="cancel()">Anuluj</button>
+  <button mat-raised-button type="button" color="primary" [mat-dialog-close]="true"
+    title="{{'saveSteelScrap' | buttonTitles}}" [disabled]="!editSteelScrap.valid || editSteelScrap.pristine"
+    (click)="submit()">
+    Zapisz
+  </button>
+</mat-dialog-actions>

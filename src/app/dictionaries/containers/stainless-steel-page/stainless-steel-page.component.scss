@@ -1,0 +1,33 @@
+.stainless-steel-details {
+  display: flex;
+}
+
+.stainless-steel-filters {
+  display: flex;
+  width: 100%;
+}
+
+.stainless-steel-table {
+  flex: 1;
+}
+
+.stainless-steel-details {
+  flex: 0 1 auto;
+}
+
+.container {
+  display: flex;
+}
+
+.filters {
+  display: flex;
+  width: 100%;
+}
+
+.table {
+  flex: 1;
+}
+/* 
+.personnel-lookup {
+  flex: 0 1 auto;
+} */

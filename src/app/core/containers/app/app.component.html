@@ -1,0 +1,37 @@
+<mat-sidenav-container fullscreen autosize fxFlexFill>
+
+    <mat-sidenav *ngIf="loggedIn$ | async" mode="side" disableClose opened autosize
+        [class.mat-sidenav-closed]="(showSidenav$ | async) === false" fxFlex fxLayout="column wrap"
+        fixedInViewport="true">
+        <span class="navigationWrapper" fxFlexFill>
+            <mat-nav-list fxLayout="column" fxFlex>
+                <a mat-list-item class="sidenavLogoContainer" [routerLink]="'/'">
+                    <img src="assets/images/we-met-logo.png" class="routeIcon">
+                    <span *ngIf="(showSidenav$ | async) === true">WE-MET</span>
+                </a>
+                <mat-divider></mat-divider>
+
+                <app-menu [sidenavExpanded]="showSidenav$ | async"></app-menu>
+                <span fxFlex></span>
+                <a mat-list-item (click)="toggleSidenav()" fxLayoutAlign="end center">
+                    <div *ngIf="showSidenav$ | async">ZWIŃ MENU
+                    </div>
+                    <mat-icon [@indicatorRotate]="(showSidenav$ | async) ? 'expanded': 'collapsed'">
+                        expand_more
+                    </mat-icon>
+                </a>
+
+            </mat-nav-list>
+        </span>
+    </mat-sidenav>
+
+    <mat-sidenav-content fxFlexFill>
+        <app-toolbar fXFlex (logOut)="logout()" *ngIf="loggedIn$ | async" [title]="title$ | async"
+            [user]="user$ | async">
+        </app-toolbar>
+        <div class="wemet-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

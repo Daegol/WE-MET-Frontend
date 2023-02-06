@@ -1,0 +1,59 @@
+<div class="container mat-elevation-z2">
+  <mat-accordion fxFlex displayMode="flat" multi="true">
+    <mat-expansion-panel expanded="true" hideToggle="true" class="mat-elevation-z0" disabled class="disabledTitle">
+      <mat-expansion-panel-header>
+        <button mat-icon-button (click)="close()" class="close-button" title="{{'closeTitleLookup' | buttonTitles}}">
+          <mat-icon>cancel</mat-icon>
+        </button>
+        <mat-panel-title class="lookup-title">
+          <b>{{ row?.name }}</b>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="first-panel-row-1">
+        {{ row?.name }}
+      </div>
+      <!-- <div class="first-panel-row-2">
+        {{ (squadron$ | async)?.cityName }}
+      </div> -->
+    </mat-expansion-panel>
+    <mat-divider></mat-divider>
+
+    <mat-expansion-panel class="mat-elevation-z0" expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title><b>AIRCRAFT TYPE</b></mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="second-panel-info">
+        <div class="second-panel-title">{{ (purchaseType$ | async)?.name }}</div>
+        <table>
+          <tr>
+            <td class="td-name">SPEED</td>
+            <td class="td-value">{{ (purchaseType$ | async)?.speed }} km/h</td>
+          </tr>
+          <tr>
+            <td class="td-name">MAXIMUM TAKE OFF WEIGHT</td>
+            <td class="td-value">
+              {{ (purchaseType$ | async)?.maximumTakeOffWeight }} kg
+            </td>
+          </tr>
+          <tr>
+            <td class="td-name">FUEL</td>
+            <td class="td-value">{{ (purchaseType$ | async)?.fuel }} g/kNs</td>
+          </tr>
+          <tr>
+            <td class="td-name">FUEL FLOW</td>
+            <td class="td-value">{{ (purchaseType$ | async)?.fuelFlow}} km</td>
+          </tr>
+        </table>
+      </div>
+    </mat-expansion-panel>
+    <mat-divider></mat-divider>
+
+    <mat-expansion-panel class="mat-elevation-z0" expanded="false">
+      <mat-expansion-panel-header>
+        <mat-panel-title><b>DESCRIPTION</b></mat-panel-title>
+      </mat-expansion-panel-header>
+      {{ row?.name }}
+    </mat-expansion-panel>
+    <mat-divider></mat-divider>
+  </mat-accordion>
+</div>

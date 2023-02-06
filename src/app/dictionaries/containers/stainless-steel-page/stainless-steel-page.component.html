@@ -1,0 +1,16 @@
+<app-dictionaries-filter class="stainless-steel-filters" fxLayout="row"
+  (globalFilterEvent)="onGlobalFilterEvent($event)" [selectedItems]="selectedStainlessSteels$ | async">
+</app-dictionaries-filter>
+
+<app-table-selection fxLayout="row" [selectedItems]="selectedStainlessSteels$ | async" (closeEvent)="clearSelection()">
+</app-table-selection>
+
+<div class="stainless-steel-container" fxLayout="row">
+  <app-stainless-steel-table class="stainless-steel-table" [stainlessSteels]="stainlessSteels$ | async"
+    [globalFilterValue]="globalFilterValue" [selectedStainlessSteels]="selectedStainlessSteels$ | async"
+    (openNewPopup)="openNewStainlessSteelPopup()" (openDeletePopup)="openDeleteStainlessSteelPopup($event)"
+    (openEditPopup)="openEditStainlessSteelPopup($event)"
+    (selectedStainlessSteelsEvent)="onSelectedStainlessSteels($event)" [selectedRow]="selectedRow$ | async"
+    (rowSelectedEvent)="onRowSelectedEvent($event)">
+  </app-stainless-steel-table>
+</div>

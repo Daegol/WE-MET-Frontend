@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Add group</h2>
+<mat-dialog-content>
+  <form [formGroup]="addGroup">
+    <div class="shipping-card">
+      <div class="row">
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Group name" formControlName="groupId" required>
+            <mat-option ngDefaultControl *ngFor="let list of finalGroupList" [value]="list.id">
+              {{list.name}}</mat-option>
+            <mat-option ngDefaultControl *ngIf="!finalGroupList?.length">
+              NO DATA</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="addGroupSubmit()" [disabled]="!addGroup.valid">
+    Save
+  </button>
+</mat-dialog-actions>

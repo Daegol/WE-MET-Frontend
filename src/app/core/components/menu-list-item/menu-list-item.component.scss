@@ -1,0 +1,41 @@
+@import '../../../../styles.scss';
+
+:host {
+  display: block;
+  outline: none;
+  overflow-x: hidden;
+  .mat-list-item {
+    color: white;
+  }
+  .mat-list-item.active {
+    color: #019592;
+  }
+  &:hover,
+  &:focus {
+    >.mat-list-item:not(.expanded) {
+      color: #019592;
+    }
+  }
+}
+
+.root{
+  font-weight: bold;
+}
+
+.child  .mat-list-item{
+  height: 30px !important;
+}
+
+.mat-list-item {
+  padding: 8px 0;
+  size: 40px;
+  .routeIcon {
+    margin-right: 15px;
+    width:30px;
+    margin-left: 10px;
+  }
+}
+
+.isDisabled{
+  display: none;
+}

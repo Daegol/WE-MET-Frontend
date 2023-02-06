@@ -1,0 +1,43 @@
+<div class="container mat-elevation-z2">
+    <mat-accordion fxFlex displayMode="flat" multi="true">
+        <mat-expansion-panel expanded="true" hideToggle="true" class="mat-elevation-z0" disabled>
+            <mat-expansion-panel-header>
+                <button mat-icon-button (click)="close()" class="close-button"
+                    title="{{'closeTitleLookup' | buttonTitles}}">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+                <mat-panel-title class="lookup-title">
+                    <b>{{row.firstName}} {{row.lastName}}</b>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="first-panel-row-1">
+                {{row.rankName}}
+            </div>
+        </mat-expansion-panel>
+
+        <mat-divider></mat-divider>
+
+        <mat-expansion-panel class="mat-elevation-z0" expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title><b>SQUADRON</b></mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="second-panel-info">
+                <div class="second-panel-title">{{squadron?.name}}</div>
+                <table>
+                    <tr>
+                        <td class="td-name">CITY</td>
+                        <td class="td-value">{{squadron?.cityName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-name">NUMBER</td>
+                        <td class="td-value">{{squadron?.number}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-name">ICAO</td>
+                        <td class="td-value">{{squadron?.icao}}</td>
+                    </tr>
+                </table>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

@@ -1,0 +1,9 @@
+<div @inOutAnimationLeft class="selection-info-container" *ngIf="selectedItems?.length > 0">
+    <div class="selection-info">
+        {{selectedItems.length}} zaznaczone elementy
+        <button mat-icon-button type="button" onkeypress="return event.keyCode != 13;" class="remove-selection-btn"
+            (click)="emitCloseEvent()" title="{{'cancelTitleSelection' | buttonTitles}}">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </div>
+</div>

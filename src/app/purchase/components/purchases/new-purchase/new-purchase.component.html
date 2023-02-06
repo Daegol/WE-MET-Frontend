@@ -1,0 +1,99 @@
+<mat-card class="details-mat-card">
+    <mat-card-title fxFlex>Add purchase</mat-card-title>
+    <form [formGroup]="newPurchase">
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-select formControlName="squadronId" placeholder="Squadron" required
+                        (selectionChange)="onSquadronSelected($event)">
+                        <mat-option *ngFor="let squadron of squadrons$ | async" [value]="squadron.id">
+                            {{squadron.name}}</mat-option>
+                        <mat-option ngDefaultControl *ngIf="!(squadrons$| async)?.length">
+                            NO DATA</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="newPurchase.controls['squadronId'].hasError('required')">
+                        <span [innerHtml]="'squadronRequired' | errorMsgs"></span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-select formControlName="localizationId" placeholder="Localization" required>
+                        <mat-option *ngFor="let localization of availableLocalizations | async"
+                            [value]="localization.id">
+                            {{localization.name}}</mat-option>
+                        <mat-option ngDefaultControl *ngIf="!(localizations$| async)?.length">
+                            NO DATA</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="newPurchase.controls['localizationId'].hasError('required')">
+                        <span [innerHtml]="'localizationRequired' | errorMsgs"></span>
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-select formControlName="purchaseTypeId" placeholder="Purchase Type" required>
+                        <!-- <mat-option *ngFor="let purchaseType of purchaseTypes$ | async" [value]="purchaseType.id">
+                            {{purchaseType.name}}</mat-option>
+                        <mat-option ngDefaultControl *ngIf="!(purchaseTypes$| async)?.length">
+                            NO DATA</mat-option> -->
+                    </mat-select>
+                    <mat-error *ngIf="newPurchase.controls['purchaseTypeId'].hasError('required')">
+                        <span [innerHtml]="'nameRequired' | errorMsgs"></span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Tail Number" formControlName="tailNumber"
+                        [pattern]="'lettersAndDigitsWithSpace' | patternValues" maxlength="25" required>
+                    <mat-error *ngIf="newPurchase.controls['tailNumber'].hasError('required')">
+                        <span [innerHtml]="'tailNumberRequired' | errorMsgs"></span>
+                    </mat-error>
+                    <mat-error *ngIf="newPurchase.controls['tailNumber'].hasError('minlength')">
+                        <span [innerHtml]="'minLength' | errorMsgs"></span>
+                    </mat-error>
+                    <mat-error *ngIf="newPurchase.controls['tailNumber'].hasError('pattern')">
+                        <span [innerHtml]="'notAllowedCharacter' | errorMsgs"></span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-select formControlName="purchaseStatusId" placeholder="Status" required>
+                        <!-- <mat-option *ngFor="let status of purchaseStatuses$ | async" [value]="status.id">
+                            {{status.name}}</mat-option>
+                        <mat-option ngDefaultControl *ngIf="!(purchaseStatuses$| async)?.length">
+                            NO DATA</mat-option> -->
+                    </mat-select>
+                    <mat-error *ngIf="newPurchase.controls['purchaseStatusId'].hasError('required')">
+                        <span [innerHtml]="'statusRequired' | errorMsgs"></span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>DESCRIPTION</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"
+                        cdkAutosizeMaxRows="10" formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row buttons-row">
+            <div class="buttons-div">
+                <button mat-button (click)="cancel()">Cancel</button>
+                <button mat-raised-button color="primary" type="button" (click)="submit()"
+                    [disabled]="!newPurchase.valid">Add
+                    Purchase</button>
+            </div>
+        </div>
+    </form>
+</mat-card>

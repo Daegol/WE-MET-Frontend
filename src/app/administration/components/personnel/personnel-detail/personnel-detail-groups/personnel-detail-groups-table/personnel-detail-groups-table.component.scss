@@ -1,0 +1,97 @@
+.mat-elevation-z2 {
+    margin: 0px 15px 110px 15px;
+}
+
+.full-width-table {
+    width: 100%;
+}
+
+.table-container {
+    display: flex;
+    position: relative;
+}
+
+.table-container .loading-shade {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.element-row:hover {
+    background:#efefef;
+}
+
+.highlight{
+    background: lightgrey;
+}
+
+.header {
+    font-weight: bold;
+}
+
+.spacer {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+mat-divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.menu-btn {
+  display: block;
+  margin: auto;
+}
+
+.actions mat-icon:hover {
+  background-color: whitesmoke;
+    cursor: pointer;
+}
+
+td.mat-column-actions {
+  width: 50px;
+}
+
+td.mat-cell:last-of-type {
+  padding-right: 0px;
+}
+
+.mat-table-sticky:last-child {
+  border-left: 1px solid #e0e0e0;
+}
+
+.spacer {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.highlight{
+    background: #ccc;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    left: 0;
+    z-index: 2;
+}
+
+.footer-actions {
+  display: flex;
+  padding: 10px;
+
+  .mat-fab {
+    margin: 10px;
+  }
+
+  .mat-divider {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+

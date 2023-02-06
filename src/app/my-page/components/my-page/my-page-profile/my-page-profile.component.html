@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="title">
+        <h4>Profil użytkownika</h4>
+    </div>
+    <mat-card class="card mat-elevation-z2">
+        <mat-card-content>
+            <button mat-button class="actions-button" mat-icon-button matTooltip="Więcej..."
+                (click)="$event.stopPropagation()" [matMenuTriggerFor]="menu" aria-label="actions-button">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openMyPageSetPasswordPopup()">
+                    <mat-icon color="primary">lock_open</mat-icon>
+                    <span>Zmień hasło</span>
+                </button>
+            </mat-menu>
+            <mat-list class="list" role="list">
+                <mat-list-item role="listitem">
+                    <div class="row">
+                        <div class="col">
+                            Imię
+                        </div>
+                        <div class="col">
+                            {{ user?.firstName }}
+                        </div>
+                    </div>
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                    <div class="row">
+                        <div class="col">
+                            Nazwisko
+                        </div>
+                        <div class="col">
+                            {{ user?.lastName }}
+                        </div>
+                    </div>
+                </mat-list-item>
+                <mat-divider class="divider-item"></mat-divider>
+                <mat-list-item role="listitem">
+                    <div class="row">
+                        <div class="col">
+                            Login
+                        </div>
+                        <div class="col">
+                            {{ user?.userName }}
+                        </div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>

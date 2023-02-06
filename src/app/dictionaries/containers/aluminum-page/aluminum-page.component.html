@@ -1,0 +1,15 @@
+<app-dictionaries-filter class="aluminum-filters" fxLayout="row" (globalFilterEvent)="onGlobalFilterEvent($event)"
+  [selectedItems]="selectedAluminums$ | async">
+</app-dictionaries-filter>
+
+<app-table-selection fxLayout="row" [selectedItems]="selectedAluminums$ | async" (closeEvent)="clearSelection()">
+</app-table-selection>
+
+<div class="aluminum-container" fxLayout="row">
+  <app-aluminum-table class="aluminum-table" [aluminums]="aluminums$ | async" [globalFilterValue]="globalFilterValue"
+    [selectedAluminums]="selectedAluminums$ | async" (openNewPopup)="openNewAluminumPopup()"
+    (openDeletePopup)="openDeleteAluminumPopup($event)" (openEditPopup)="openEditAluminumPopup($event)"
+    (selectedAluminumsEvent)="onSelectedAluminums($event)" [selectedRow]="selectedRow$ | async"
+    (rowSelectedEvent)="onRowSelectedEvent($event)">
+  </app-aluminum-table>
+</div>

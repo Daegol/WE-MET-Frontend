@@ -1,0 +1,107 @@
+<div class="mat-elevation-z2">
+  <div class="table-container">
+    <table mat-table class="full-width-table" matSort aria-label="Elements">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox color="primary" (change)="$event ? toggleSelected(row) : null" [checked]="isSelected(row)"
+            [hideUnauthorized]="['Administrator', 'Main Administrator']">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rankShortname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>RANK</th>
+        <td mat-cell *matCellDef="let row">{{ row.rankShortname }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>FIRST NAME</th>
+        <td mat-cell *matCellDef="let row">{{ row.firstName | limitString:20}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>LAST NAME</th>
+        <td mat-cell *matCellDef="let row">{{ row.lastName | limitString:20}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>LOGIN</th>
+        <td mat-cell *matCellDef="let row">{{ row.email | limitString:30}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="squadronName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>SQUADRON</th>
+        <td mat-cell *matCellDef="let row">{{ row.squadronName | limitString:20}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="callsign">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>CALL SIGN</th>
+        <td mat-cell *matCellDef="let row">{{ row.callsign | limitString:20}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="isPersonnel">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>PERSONNEL</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox [checked]="row.isPersonnel" disabled></mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="isLocked">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>LOCKED</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox [checked]="row.isLocked" disabled></mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions" stickyEnd>
+        <th mat-header-cell class="actions-width" *matHeaderCellDef></th>
+        <td mat-cell class="actions-width" *matCellDef="let row">
+          <button class="menu-btn" mat-icon-button matTooltip="More actions..." (click)="$event.stopPropagation()"
+            (click)="emitActionsSelectedPersonnel(row)" [matMenuTriggerFor]="menu" aria-label="actions-button">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [hideUnauthorized]="['Administrator', 'Main Administrator']"
+              [disabled]="!actionsSelectedPersonnel" (click)="openSetPersonnelPasswordPopup()">
+              <mat-icon color="primary">lock_open</mat-icon>
+              <span>Change password</span>
+            </button>
+            <button mat-menu-item [disabled]="!actionsSelectedPersonnel" (click)="openEditPersonnelPopup(row.id)">
+              <mat-icon color="primary">view_list</mat-icon>
+              <span [hideUnauthorized]="['Administrator', 'Main Administrator']">Edit</span>
+              <span [hideAuthorized]="['Administrator', 'Main Administrator']">Details</span>
+            </button>
+            <button [hideUnauthorized]="['Administrator', 'Main Administrator']" mat-menu-item
+              (click)="openDeletePersonnelPopup([row])">
+              <mat-icon color="warn">delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row class="element-row" *matRowDef="let row; columns: displayedColumns"
+        [ngClass]="{ highlight: selectedRow === row }" (click)="selectRow(row)"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="10">{{getNoDataMessage()}}</td>
+      </tr>
+    </table>
+  </div>
+  <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="50"
+    [pageSizeOptions]="[25, 50, 100, 250]" [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>
+
+<div class="footer" [hideUnauthorized]="['Main Administrator', 'Administrator']">
+  <div class="footer-actions" fxFlex fxLayout="row">
+    <span class="spacer"></span>
+    <button mat-fab color="warn" [disabled]="areSelectedItems()" title="{{'deleteTitlePersonnel' | buttonTitles}}"
+      (click)="openDeletePersonnelPopup(selection.selected)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <mat-divider vertical="true"></mat-divider>
+    <button mat-fab color="primary" (click)="openNewPersonnelPopup()" title="{{'addTitlePersonnel' | buttonTitles}}">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div fxLayout="row" class="filter-row" [formGroup]="filterParams">
+    <p class="filters-title">FILTRY</p>
+    <mat-form-field class="mat-form-field-filter" appearance="outline">
+        <mat-label>SZUKAJ</mat-label>
+        <input matInput #input (input)="onGlobalFilterChanged($event.target.value)" formControlName="global">
+    </mat-form-field>
+    <button mat-button type="button" fxLayoutAlign="center" class="clear-filters-btn" (click)="onClearFilters()"
+        [disabled]="selectedItems?.length > 0">
+        WYCZYŚĆ FILTRY
+    </button>
+</div>
